@@ -1,7 +1,8 @@
+<h1>Salesforce Django quickstart</h1>
 {% if contacts %}
     <ul>
-    {% for contact in cointacts %}
-        <li>{{ contact.first_name }} + {{ contact.last_name }}</li>
+    {% for contact in contacts %}
+        <li>{{ contact.first_name }} {{ contact.last_name }}</li>
     {% endfor %}
     </ul>
 {% else %}
