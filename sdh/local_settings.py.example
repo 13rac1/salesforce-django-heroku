@@ -1,0 +1,24 @@
+from settings import *
+
+DATABASES['salesforce'] = {
+    'ENGINE': 'salesforce.backend',
+    'CONSUMER_KEY' : None,
+    'CONSUMER_SECRET' : None,
+    'USER': None,
+    'PASSWORD': None,
+    'HOST': 'https://login.salesforce.com',
+}
+
+if not DATABASES['salesforce']['CONSUMER_KEY']:
+    raise Exception("Salesforce Oauth 2.0 Consumer Key has not been set for local "
+                    "development in 'sdh/local_settings.py'")
+if not DATABASES['salesforce']['CONSUMER_SECRET']:
+    raise Exception("Salesforce Oauth 2.0 Consumer Secret has not been set "
+                    "for local development in 'dh/local_settings.py'")
+if not DATABASES['salesforce']['USER']:
+    raise Exception("Salesforce Account Username has not been set for local "
+                    "development in 'sdh/local_settings.py'")
+if not DATABASES['salesforce']['PASSWORD']:
+    raise Exception("Salesforce Account Password + Account Token have not "
+                    "been set for local development in 'sdh/local_settings.py'")
+

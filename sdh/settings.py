@@ -12,20 +12,18 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^3-dzmdo17sm*5iom&304zg4on1#g1foh)*o3l^64a4*3)585j'
+SECRET_KEY = 'jm)ji7s5!@(#%rfh+9!)mot&@cio*a^npebju#gfqha-0vrz=d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -36,6 +34,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'salesforce',
+    'bootstrap3',
+    'sdh',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,7 +52,6 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'sdh.urls'
 
 WSGI_APPLICATION = 'sdh.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -76,8 +76,35 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+# Static asset configuration
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+#Salesforce config
+DATABASES['salesforce'] = {
+    'ENGINE': 'salesforce.backend',
+    'CONSUMER_KEY' : os.environ.get('SF_CONSUMER_KEY', ''),
+    'CONSUMER_SECRET' : os.environ.get('SF_CONSUMER_SECRET', ''),
+    'USER': os.environ.get('SF_USER', ''),
+    'PASSWORD': os.environ.get('SF_PASSWORD', '') + os.environ.get('SF_TOKEN', ''),
+    'HOST': 'https://login.salesforce.com',
+}
+
+DATABASE_ROUTERS = [
+    "salesforce.router.ModelRouter"
+]
