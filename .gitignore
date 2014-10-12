@@ -1,0 +1,7 @@
+venv
+*.pyc
+staticfiles
+.project
+.pydevproject
+sdh/local_settings.py
+

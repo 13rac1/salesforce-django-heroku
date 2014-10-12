@@ -1,0 +1,14 @@
+Django==1.7
+argparse==1.2.1
+dj-database-url==0.3.0
+dj-static==0.0.6
+django-bootstrap3==4.11.0
+django-salesforce==0.4
+django-toolbelt==0.0.1
+gunicorn==19.1.1
+psycopg2==2.5.4
+pytz==2014.7
+requests==2.4.3
+simplejson==3.6.4
+static3==0.5.1
+wsgiref==0.1.2
