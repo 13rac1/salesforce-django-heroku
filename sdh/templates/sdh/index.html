@@ -1,0 +1,9 @@
+{% if contacts %}
+    <ul>
+    {% for contact in cointacts %}
+        <li>{{ contact.first_name }} + {{ contact.last_name }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Salesforce Contacts are available.</p>
+{% endif %}

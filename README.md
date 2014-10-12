@@ -48,8 +48,7 @@ Git remote heroku added
 12. Make note of both the `Consumer Key` and `Consumer Secret`.
 13. Copy the `sdh/local_settings.py.example` file to `sdh/local_settings.py`.
 14. Edit the new `sdh/local_settings.py` file and fill in all the fields. Note: The
-    PASSWORD field is made up from your User Account Password + User Account Token. 
-    
+    PASSWORD field is made up from your User Account Password + User Account Token.    
 ```
 DATABASES['salesforce'] = {
     'ENGINE': 'salesforce.backend',
@@ -60,11 +59,12 @@ DATABASES['salesforce'] = {
     'HOST': 'https://login.salesforce.com',
 }
 ```
+
 14. Now
 
 ##Actually using your own Salesforce SObjects
 Export the Salesforce table models you need:
-
-    ./manage.py inspectdb --database="salesforce" --table-filter="Lead$|Contact$" > sdh\models.py
-
+```
+$ ./manage.py inspectdb --database="salesforce" --table-filter="Lead$|Contact$" --settings=sdh.local_settings > sdh\models.py
+```
 Then comment/remove model field the foreign keys to unused SObjects.
