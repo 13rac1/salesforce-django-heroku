@@ -60,7 +60,32 @@ DATABASES['salesforce'] = {
 }
 ```
 
-14. Now
+14. Add the same values to the Heroku Environment so they are pulled in from `sdh/settings.py`
+```
+heroku config:set SF_CONSUMER_KEY=<your-consumer-key>
+heroku config:set SF_CONSUMER_SECRET=<your-consumer-secret>
+heroku config:set SF_USER=<your-salesforce-username>
+heroku config:set SF_PASSWORD=<your-salesforce-password>
+heroku config:set SF_TOKEN=<your-salesforce-token>
+```
+
+15. Setup the local environment:
+```
+virtualenv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+16. Run the local server with `local_settings.py`
+```
+python manage.py runserver --settings=sdh.local_settings
+```
+17. Test your new Salesforce connected local environment.
+18. Push the project to Heroku:
+```
+git push heroku master
+```
+19. Test your new Salesforce connected Heroku Django Project
+20. Stop looking at this.
 
 ##Actually using your own Salesforce SObjects
 Export the Salesforce table models you need:
